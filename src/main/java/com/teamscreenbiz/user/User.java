@@ -20,42 +20,28 @@ public class User extends BaseEntity{
   @NotNull
   @Size(min = 5, max = 20)
   private String firstName;
-
-
   @Size(min = 5, max = 20)
   private String lastName;
-
   @NotNull
   @Size(min = 3, max = 20)
   private String userName;
-
-
   private String address;
-
   @NotNull
 //  @JsonIgnore
 //  @Size(min = 5, max = 16) /*Size property not working check*/
   private String password;
-
 //  @JsonIgnore
   private String[] roles;
   boolean emailConfirmed;
-
 //TODO max: not working validation moved on to other tables for now
   @Size(min = 3, max = 321)
   private String email;
-
   @JsonProperty(required = true)
   boolean firstPhoneNumberConfirmed;
   private Long firstPhoneNumber;
-
-
-
   boolean secondPhoneNumberConfirmed;
   //TODO max: check for hypenated mobile number
   private Long secondPhoneNumber;
-
-
 
   protected User() {super();}
 
