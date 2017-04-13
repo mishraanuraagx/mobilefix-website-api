@@ -59,8 +59,8 @@ public class User extends BaseEntity{
 
   protected User() {super();}
 
-  public User(String firstName, String lastName, String userName, String address,
-              String password, String[] roles, boolean emailConfirmed, String email,
+  public User(String firstName, String lastName, String userName,
+              String password,String address, String[] roles, boolean emailConfirmed, String email,
               boolean firstPhoneNumberConfirmed, Long firstPhoneNumber,
               boolean secondPhoneNumberConfirmed, Long secondPhoneNumber) {
     this.firstName = firstName;

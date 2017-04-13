@@ -27,9 +27,10 @@ public class DatabaseLoader implements ApplicationRunner{
 //    boolean secondPhoneNumberConfirmed, Long secondPhoneNumber
 
         new User("Anuraag", "Mishra",  "max", "death","#504 sec-38A Chandigarh", new String[] {"ROLE_USER","ROLE_ADMIN"},false,
-            "mishra.anuraag@yahoo.com",true,8146928380L,false,null)
-//        new User("Harsh", "Singh",  "hss", "eventful","#504 sec-38A Chandigarh", new String[] {"ROLE_USER"},false,
-//            "mishra.anuraag@yahoo.com",true,8146928380L,false,null),
+            "mishra.anuraag@yahoo.com",true,8146928380L,false,null),
+        new User("Shubham Raj", "Wadhwa","Raj","alive","Room no. 101, Block-1, Boys Hostel-7, Panjab university, Sector-14, Chandigarh",
+            new String[]{"ROLE_USER","ROLE_ADMIN"},false,"shubhamchandigarh68@gmail.com",true,9988720494L,
+            false,null)
 //        new User("Anuraag", "Mishra",  "max", "death","#504 sec-38A Chandigarh", new String[] {"ROLE_USER"},false,
 //            "mishra.anuraag@yahoo.com",true,8146928380L,false,null),
 //        new User("Anuraag", "Mishra",  "max", "death","#504 sec-38A Chandigarh", new String[] {"ROLE_USER"},false,
