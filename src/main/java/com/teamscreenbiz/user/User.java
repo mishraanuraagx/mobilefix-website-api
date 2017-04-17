@@ -4,10 +4,14 @@ package com.teamscreenbiz.user;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.teamscreenbiz.core.BaseEntity;
+import com.teamscreenbiz.transaction.Transaction;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -42,8 +46,14 @@ public class User extends BaseEntity{
   boolean secondPhoneNumberConfirmed;
   //TODO max: check for hypenated mobile number
   private Long secondPhoneNumber;
+  @OneToMany
+  private List<Transaction> transactions;
 
-  protected User() {super();}
+
+  protected User() {
+    super();
+    transactions = new ArrayList<>();
+  }
 
   public User(String firstName, String lastName, String userName,
               String password,String address, String[] roles, boolean emailConfirmed, String email,
@@ -61,6 +71,14 @@ public class User extends BaseEntity{
     this.firstPhoneNumber = firstPhoneNumber;
     this.secondPhoneNumberConfirmed = secondPhoneNumberConfirmed;
     this.secondPhoneNumber = secondPhoneNumber;
+  }
+
+  public List<Transaction> getTransactions() {
+    return transactions;
+  }
+
+  public void addTransaction(Transaction transaction) {
+    transactions.add(transaction);
   }
 
   public String getFirstName() {

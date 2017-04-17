@@ -5,6 +5,7 @@ import com.teamscreenbiz.company.Company;
 import com.teamscreenbiz.core.BaseEntity;
 import com.teamscreenbiz.productPrice.ProductPriceCCT;
 import com.teamscreenbiz.productPrice.ProductPriceCommercial;
+import com.teamscreenbiz.transaction.Transaction;
 import com.teamscreenbiz.vendor.Vendor;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
@@ -23,6 +25,7 @@ public class Product extends BaseEntity {
   @ManyToOne
   private Company company;
   private String mobileModel;
+  //TODO max: Create an ENUM classs later
   private final static String problem = "Screen Replace";
   @ManyToMany
   private List<Vendor> vendors;
@@ -31,11 +34,14 @@ public class Product extends BaseEntity {
   private ProductPriceCCT productPriceCCT;
   @OneToOne
   private ProductPriceCommercial productPriceCommercial;
+  @OneToMany
+  private List<Transaction> transactions;
 
 
   protected Product(){
     super();
     vendors = new ArrayList<>();
+    transactions = new ArrayList<>();
 
   }
 
@@ -45,6 +51,14 @@ public class Product extends BaseEntity {
     this.company = company;
     this.mobileModel = mobileModel;
     this.rating = rating;
+  }
+
+  public List<Transaction> getTransactions() {
+    return transactions;
+  }
+
+  public void addTransaction(Transaction transaction) {
+    transactions.add(transaction);
   }
 
   public ProductPriceCommercial getProductPriceCommercial() {
@@ -73,7 +87,7 @@ public class Product extends BaseEntity {
     this.mobileModel = mobileModel;
   }
 
-  public List<Vendor> getVendor() {
+  public List<Vendor> getVendors() {
     return vendors;
   }
   public void addVendor(Vendor vendor){
