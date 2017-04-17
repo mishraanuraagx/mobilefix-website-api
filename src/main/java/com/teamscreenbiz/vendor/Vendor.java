@@ -2,11 +2,13 @@ package com.teamscreenbiz.vendor;
 
 import com.teamscreenbiz.core.BaseEntity;
 import com.teamscreenbiz.product.Product;
+import com.teamscreenbiz.transaction.Transaction;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -20,10 +22,13 @@ public class Vendor extends BaseEntity {
   private String desc;
   @ManyToMany
   private List<Product> products;
+  @OneToMany
+  private List<Transaction> transactions;
 
   protected Vendor(){
     super();
     products = new ArrayList<>();
+    transactions = new ArrayList<>();
   }
 
   public Vendor(String name, String address, Long phoneNumber, int[] rating, int finalRating,
@@ -34,6 +39,14 @@ public class Vendor extends BaseEntity {
     this.rating = rating;
     this.finalRating = finalRating;
     this.desc = desc;
+  }
+
+  public List<Transaction> getTransactions() {
+    return transactions;
+  }
+
+  public void addTransaction(Transaction transaction) {
+    transactions.add(transaction);
   }
 
   public String getName() {
