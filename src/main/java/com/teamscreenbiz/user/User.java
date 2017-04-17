@@ -10,15 +10,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-public class User extends BaseEntity{
+public class User extends BaseEntity {
   public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
-      Pattern.compile("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
+      Pattern.compile(
+          "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
           Pattern.CASE_INSENSITIVE);
 
   @NotNull
@@ -28,23 +31,27 @@ public class User extends BaseEntity{
   private String lastName;
   @NotNull
   @Size(min = 3, max = 20)
+  @Column(unique = true)
   private String userName;
+  @Size(max = 100)
   private String address;
   @NotNull
-//  @JsonIgnore
-//  @Size(min = 5, max = 16) /*Size property not working check*/
+  @JsonIgnore
+  @Size(min = 5, max = 16)
   private String password;
-//  @JsonIgnore
+  @JsonIgnore //TODO max: set this to default users
   private String[] roles;
   boolean emailConfirmed;
-//TODO max: not working validation moved on to other tables for now
+  //TODO max: not working validation moved on to other tables for now
   @Size(min = 3, max = 321)
   private String email;
   @JsonProperty(required = true)
   boolean firstPhoneNumberConfirmed;
+//  @Size(max = 10)
+//  TODO max: still some issue for size property
   private Long firstPhoneNumber;
   boolean secondPhoneNumberConfirmed;
-  //TODO max: check for hypenated mobile number
+//  TODO max: check for hypenated mobile number
   private Long secondPhoneNumber;
   @OneToMany
   private List<Transaction> transactions;
@@ -56,7 +63,7 @@ public class User extends BaseEntity{
   }
 
   public User(String firstName, String lastName, String userName,
-              String password,String address, String[] roles, boolean emailConfirmed, String email,
+              String password, String address, String[] roles, boolean emailConfirmed, String email,
               boolean firstPhoneNumberConfirmed, Long firstPhoneNumber,
               boolean secondPhoneNumberConfirmed, Long secondPhoneNumber) {
     this.firstName = firstName;
@@ -142,7 +149,7 @@ public class User extends BaseEntity{
   }
 
   public void setEmail(String email) {
-    if(validate(email)){
+    if (validate(email)) {
       this.email = email;
       //TODO max: set message for successfull email update
     }
@@ -152,7 +159,7 @@ public class User extends BaseEntity{
 
 
   public static boolean validate(String emailStr) {
-    Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
+    Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
     return matcher.find();
   }
 
@@ -187,7 +194,6 @@ public class User extends BaseEntity{
   public void setSecondPhoneNumber(Long secondPhoneNumber) {
     this.secondPhoneNumber = secondPhoneNumber;
   }
-
 
 
 }
