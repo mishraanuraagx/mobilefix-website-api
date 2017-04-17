@@ -1,23 +1,43 @@
 package com.teamscreenbiz.company;
 
 import com.teamscreenbiz.core.BaseEntity;
+import com.teamscreenbiz.product.Product;
 
+import org.aspectj.weaver.ast.Not;
+
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Company extends BaseEntity{
+  @NotNull
   private String companyName;
-  private String Desc;
+  private String desc;
   //TODO max: add LOGO class later for pic saving
+  @OneToMany
+  private List<Product> products;
 
-  protected Company(){
+  protected Company()
+  {
     super();
+    products = new ArrayList<>();
   }
 
   public Company(String companyName, String desc) {
-    this();
     this.companyName = companyName;
-    Desc = desc;
+    this.desc = desc;
+  }
+
+  public List<Product> getProducts() {
+    return products;
+  }
+
+  public void addProducts(Product product) {
+    products.add(product);
   }
 
   public String getCompanyName() {
@@ -29,10 +49,11 @@ public class Company extends BaseEntity{
   }
 
   public String getDesc() {
-    return Desc;
+    return desc;
   }
 
-  public void setDesc(String desc) {
-    Desc = desc;
+  public void setDesc(String desc)
+  {
+    this.desc = desc;
   }
 }
