@@ -6,6 +6,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.teamscreenbiz.core.BaseEntity;
 import com.teamscreenbiz.transaction.Transaction;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -13,12 +16,12 @@ import java.util.regex.Pattern;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
 public class User extends BaseEntity {
+  public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
   public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
       Pattern.compile(
           "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
@@ -32,12 +35,12 @@ public class User extends BaseEntity {
   @NotNull
   @Size(min = 3, max = 20)
   @Column(unique = true)
-  private String userName;
+  private String username;
   @Size(max = 100)
   private String address;
   @NotNull
   @JsonIgnore
-  @Size(min = 5, max = 16)
+//  @Size(min = 5, max = 16)
   private String password;
   @JsonIgnore //TODO max: set this to default users
   private String[] roles;
@@ -62,15 +65,15 @@ public class User extends BaseEntity {
     transactions = new ArrayList<>();
   }
 
-  public User(String firstName, String lastName, String userName,
+  public User(String firstName, String lastName, String username,
               String password, String address, String[] roles, boolean emailConfirmed, String email,
               boolean firstPhoneNumberConfirmed, Long firstPhoneNumber,
               boolean secondPhoneNumberConfirmed, Long secondPhoneNumber) {
     this.firstName = firstName;
     this.lastName = lastName;
-    this.userName = userName;
+    this.username = username;
     this.address = address;
-    this.password = password;
+    setPassword(password);
     this.roles = roles;
     this.emailConfirmed = emailConfirmed;
     this.email = email;
@@ -104,12 +107,12 @@ public class User extends BaseEntity {
     this.lastName = lastName;
   }
 
-  public String getUserName() {
-    return userName;
+  public String getUsername() {
+    return username;
   }
 
-  public void setUserName(String userName) {
-    this.userName = userName;
+  public void setUsername(String username) {
+    this.username = username;
   }
 
   public String getPassword() {
@@ -117,7 +120,7 @@ public class User extends BaseEntity {
   }
 
   public void setPassword(String password) {
-    this.password = password;
+    this.password = PASSWORD_ENCODER.encode(password);
   }
 
   public String[] getRoles() {

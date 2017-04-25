@@ -21,4 +21,98 @@ public class CompanyEmployee extends BaseEntity {
   //TODO max: add ID_PROOF pdf file
   private String[] roles;
 
+  public CompanyEmployee(String name, Long phoneNumber, String email, String address,
+                         Date date, String username, String password, String pass_Hint, char sex,
+                         String[] roles) {
+    this.name = name;
+    this.phoneNumber = phoneNumber;
+    this.email = email;
+    this.address = address;
+    this.date = date;
+    this.username = username;
+    this.password = password;
+    this.pass_Hint = pass_Hint;
+    this.sex = sex;
+    this.roles = roles;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public Long getPhoneNumber() {
+    return phoneNumber;
+  }
+
+  public void setPhoneNumber(Long phoneNumber) {
+    this.phoneNumber = phoneNumber;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public String getAddress() {
+    return address;
+  }
+
+  public void setAddress(String address) {
+    this.address = address;
+  }
+
+  public Date getDate() {
+    return date;
+  }
+
+  public void setDate(Date date) {
+    this.date = date;
+  }
+
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
+  public String getPass_Hint() {
+    return pass_Hint;
+  }
+
+  public void setPass_Hint(String pass_Hint) {
+    this.pass_Hint = pass_Hint;
+  }
+
+  public char getSex() {
+    return sex;
+  }
+
+  public void setSex(char sex) {
+    this.sex = sex;
+  }
+
+  public String[] getRoles() {
+    return roles;
+  }
+
+  public void setRoles(String[] roles) {
+    this.roles = roles;
+  }
 }
