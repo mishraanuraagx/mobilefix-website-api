@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 public class DetailsService implements UserDetailsService {
   @Autowired
   UserRepository users;
+  @Autowired
   CompanyEmployeeRepository employees;
 
   @Override

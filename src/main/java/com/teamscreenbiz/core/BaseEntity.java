@@ -15,7 +15,12 @@ public abstract class BaseEntity {
   @Version
   private Long version;
 
-  protected BaseEntity(){
+  protected BaseEntity() {
     id = null;
+  }
+
+
+  public Long getId() {
+    return id;
   }
 }

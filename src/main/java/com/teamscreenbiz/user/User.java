@@ -39,11 +39,11 @@ public class User extends BaseEntity {
   @Size(max = 100)
   private String address;
   @NotNull
-  @JsonIgnore
+//  @JsonIgnore
 //  @Size(min = 5, max = 16)
   private String password;
-  @JsonIgnore //TODO max: set this to default users
-  private String[] roles;
+//  @JsonIgnore //TODO max: set this to default users
+  private String[] roles = new String[]{"User"};
   boolean emailConfirmed;
   //TODO max: not working validation moved on to other tables for now
   @Size(min = 3, max = 321)
@@ -63,24 +63,19 @@ public class User extends BaseEntity {
   protected User() {
     super();
     transactions = new ArrayList<>();
+    setRoles(new String[]{"User"});
   }
 
   public User(String firstName, String lastName, String username,
-              String password, String address, String[] roles, boolean emailConfirmed, String email,
-              boolean firstPhoneNumberConfirmed, Long firstPhoneNumber,
-              boolean secondPhoneNumberConfirmed, Long secondPhoneNumber) {
+              String password, String address, String email,Long firstPhoneNumber) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.username = username;
     this.address = address;
     setPassword(password);
-    this.roles = roles;
-    this.emailConfirmed = emailConfirmed;
     this.email = email;
-    this.firstPhoneNumberConfirmed = firstPhoneNumberConfirmed;
     this.firstPhoneNumber = firstPhoneNumber;
-    this.secondPhoneNumberConfirmed = secondPhoneNumberConfirmed;
-    this.secondPhoneNumber = secondPhoneNumber;
+
   }
 
   public List<Transaction> getTransactions() {
@@ -115,7 +110,8 @@ public class User extends BaseEntity {
     this.username = username;
   }
 
-  public String getPassword() {
+//  @JsonIgnore
+  protected String getPassword() {
     return password;
   }
 

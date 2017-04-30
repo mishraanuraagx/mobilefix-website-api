@@ -2,11 +2,22 @@ package com.teamscreenbiz.companyEmployee;
 
 import com.teamscreenbiz.core.BaseEntity;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.persistence.Entity;
 
 @Entity
 public class CompanyEmployee extends BaseEntity {
+  public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
+  public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
+      Pattern.compile(
+          "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
+          Pattern.CASE_INSENSITIVE);
+
   private String name;
   private Long phoneNumber;
   private String email;
@@ -30,7 +41,7 @@ public class CompanyEmployee extends BaseEntity {
     this.address = address;
     this.date = date;
     this.username = username;
-    this.password = password;
+    setPassword(password);
     this.pass_Hint = pass_Hint;
     this.sex = sex;
     this.roles = roles;
@@ -57,8 +68,17 @@ public class CompanyEmployee extends BaseEntity {
   }
 
   public void setEmail(String email) {
-    this.email = email;
+    //TODO max: set message for successfull email update
+    if (validate(email))
+      this.email = email;
   }
+
+
+  public static boolean validate(String emailStr) {
+    Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
+    return matcher.find();
+  }
+  // TODO max: Code repetition
 
   public String getAddress() {
     return address;
@@ -89,7 +109,7 @@ public class CompanyEmployee extends BaseEntity {
   }
 
   public void setPassword(String password) {
-    this.password = password;
+    this.password = PASSWORD_ENCODER.encode(password);
   }
 
   public String getPass_Hint() {
