@@ -94,10 +94,10 @@ public class DatabaseLoader implements ApplicationRunner{
 //  String name, Company company, String mobileModel,double rating
 
     List<Product> allParts = Arrays.asList(
-        new Product("xoxoxy", brands.get(1), "", 4.8),
-        new Product("product2", brands.get(2), "", 3.8),
-        new Product("product3", brands.get(2), "", 2.9),
-        new Product("product4", brands.get(1), "", 4.9)
+        new Product("xoxoxy", 4.8),
+        new Product("product2", 3.8),
+        new Product("product3", 2.9),
+        new Product("product4", 4.9)
     );
     products.save(allParts);
 

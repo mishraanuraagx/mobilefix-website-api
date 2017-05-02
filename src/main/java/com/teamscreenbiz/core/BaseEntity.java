@@ -10,7 +10,7 @@ import javax.persistence.Version;
 public abstract class BaseEntity {
   @Id
   @GeneratedValue(strategy =  GenerationType.AUTO)
-  private final Long id;
+  protected final Long id;
 
   @Version
   private Long version;
@@ -19,8 +19,16 @@ public abstract class BaseEntity {
     id = null;
   }
 
+  public Long getVersion() {
+    return version;
+  }
+
+  public void setVersion(Long version) {
+    this.version = version;
+  }
 
   public Long getId() {
     return id;
   }
+
 }

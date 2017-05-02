@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <link rel="stylesheet" th:href="@{/app.css}" />
 
-    <title th:text="'giflib | ' + ${page_title}">giflib</title>
+    <title th:text="'Scrrenbiz | ' + ${page_title}">Screenbiz</title>
 </head>
 
 <body>
@@ -26,14 +26,14 @@
             <ul class="right hide-on-med-and-down">
                 <li th:classappend="${#httpServletRequest.servletPath.equals('/upload') ? 'active' : ''}"><a th:href="@{/upload}">Upload</a></li>
                 <li th:classappend="${#httpServletRequest.servletPath.equals('/') ? 'active' : ''}"><a th:href="@{/}">Explore</a></li>
-                <li th:classappend="${#httpServletRequest.servletPath.equals('/categories') ? 'active' : ''}"><a th:href="@{/categories}">Categories</a></li>
-                <li th:classappend="${#httpServletRequest.servletPath.equals('/favorites') ? 'active' : ''}"><a th:href="@{/favorites}">Favorites</a></li>
+                <li th:classappend="${#httpServletRequest.servletPath.equals('/categories') ? 'active' : ''}"><a th:href="@{/companies}">Companies</a></li>
+                <li th:classappend="${#httpServletRequest.servletPath.equals('/favorites') ? 'active' : ''}"><a th:href="@{/dashboard}">Dashboard</a></li>
             </ul>
             <ul id="mobile-nav" class="side-nav">
                 <li th:classappend="${#httpServletRequest.servletPath.equals('/upload') ? 'active' : ''}"><a th:href="@{/upload}">Upload</a></li>
                 <li th:classappend="${#httpServletRequest.servletPath.equals('/') ? 'active' : ''}"><a th:href="@{/}">Explore</a></li>
-                <li th:classappend="${#httpServletRequest.servletPath.equals('/categories') ? 'active' : ''}"><a th:href="@{/categories}">Categories</a></li>
-                <li th:classappend="${#httpServletRequest.servletPath.equals('/favorites') ? 'active' : ''}"><a th:href="@{/favorites}">Favorites</a></li>
+                <li th:classappend="${#httpServletRequest.servletPath.equals('/categories') ? 'active' : ''}"><a th:href="@{/companoes}">Companies</a></li>
+                <li th:classappend="${#httpServletRequest.servletPath.equals('/favorites') ? 'active' : ''}"><a th:href="@{/dashboard}">Dashboard</a></li>
             </ul>
         </div>
     </nav>

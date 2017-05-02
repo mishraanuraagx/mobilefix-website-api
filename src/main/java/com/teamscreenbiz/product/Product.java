@@ -1,8 +1,8 @@
 package com.teamscreenbiz.product;
 
 
-import com.teamscreenbiz.company.Company;
 import com.teamscreenbiz.core.BaseEntity;
+import com.teamscreenbiz.mobileModel.MobileModel;
 import com.teamscreenbiz.productPrice.ProductPriceCCT;
 import com.teamscreenbiz.productPrice.ProductPriceCommercial;
 import com.teamscreenbiz.transaction.Transaction;
@@ -21,10 +21,8 @@ import javax.validation.constraints.NotNull;
 public class Product extends BaseEntity {
   @NotNull
   private String name;
-  @NotNull
   @ManyToOne
-  private Company company;
-  private String mobileModel;
+  private MobileModel mobileModel;
   //TODO max: Create an ENUM classs later
   private final static String problem = "Screen Replace";
   @ManyToMany
@@ -45,11 +43,8 @@ public class Product extends BaseEntity {
 
   }
 
-  public Product(String name, Company company, String mobileModel,
-                 double rating) {
+  public Product(String name,double rating) {
     this.name = name;
-    this.company = company;
-    this.mobileModel = mobileModel;
     this.rating = rating;
   }
 
@@ -70,21 +65,13 @@ public class Product extends BaseEntity {
     this.productPriceCommercial = productPriceCommercial;
   }
 
-  public Company getCompany() {
-    return company;
-  }
-
-  public void setCompany(Company company) {
-    this.company = company;
-    company.addProducts(this);
-  }
-
-  public String getMobileModel() {
+  public MobileModel getMobileModel() {
     return mobileModel;
   }
 
-  public void setMobileModel(String mobileModel) {
+  public void setMobileModel(MobileModel mobileModel) {
     this.mobileModel = mobileModel;
+    mobileModel.addProducts(this);
   }
 
   public List<Vendor> getVendors() {

@@ -1,30 +1,31 @@
 package com.teamscreenbiz.company;
 
 import com.teamscreenbiz.core.BaseEntity;
-import com.teamscreenbiz.product.Product;
-
-import org.aspectj.weaver.ast.Not;
+import com.teamscreenbiz.mobileModel.MobileModel;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Company extends BaseEntity{
   @NotNull
+  @Size(min = 2, max = 16)
   private String companyName;
+  @Length(max = 60)
   private String desc;
   //TODO max: add LOGO class later for pic saving
   @OneToMany
-  private List<Product> products;
+  private List<MobileModel> mobileModels;
 
-  protected Company()
+  public Company()
   {
     super();
-    products = new ArrayList<>();
+    mobileModels = new ArrayList<>();
   }
 
   public Company(String companyName, String desc) {
@@ -32,12 +33,12 @@ public class Company extends BaseEntity{
     this.desc = desc;
   }
 
-  public List<Product> getProducts() {
-    return products;
+  public List<MobileModel> getMobileModels() {
+    return mobileModels;
   }
 
-  public void addProducts(Product product) {
-    products.add(product);
+  public void addMobileModels(MobileModel mobileModel) {
+    mobileModels.add(mobileModel);
   }
 
   public String getCompanyName() {
@@ -55,5 +56,20 @@ public class Company extends BaseEntity{
   public void setDesc(String desc)
   {
     this.desc = desc;
+  }
+
+  @Override
+  public int hashCode() {
+    return super.hashCode();
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (id == null || obj == null || getClass() != obj.getClass())
+      return false;
+    Company that = (Company) obj;
+    return id.equals(that.id);
   }
 }
