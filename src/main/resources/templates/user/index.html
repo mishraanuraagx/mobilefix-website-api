@@ -17,7 +17,7 @@
     <div class="divider"></div>
     <div class="row">
         <div th:each="cat : ${companies}" class="col s12 l4">
-            <div class="card"  style="background-color:#199919">
+            <div class="card"  style="background-color:#191919">
                 <div class="card-content">
                     <div class="card-title">
                         <a class="name" th:href="@{|/companies/${cat.id}|}" th:text="${cat.companyName}">Company Name</a>

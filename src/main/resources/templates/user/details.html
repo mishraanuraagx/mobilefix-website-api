@@ -8,7 +8,7 @@
     <div class="gifs container">
         <h2 th:text="${company.companyName}" style="color:#191919"></h2>
         <div class="row">
-            <div th:each="mobileModel : ${company.getMobileModels()}" class="col s12 l4">
+            <div th:each="mobileModel : ${company.mobileModels}" class="col s12 l4">
                 <a th:href="@{|/mobileModels/${mobileModel.id}|}">
                     <!--<img th:src="@{|/mobileModels/${mobileModel.id}.jpeg|}" />-->
                     <img src="https://pbs.twimg.com/profile_images/682878332418011136/ty_XEBLE.jpg" alt=""/>

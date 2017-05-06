@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="layout :: head(${mobileModel.name})"></head>
+<body>
+<div th:replace="layout :: nav"></div>
+<div th:replace="layout :: searchbar"></div>
+<div th:replace="layout :: flash"></div>
+<div class="gif-detail container">
+
+    <div class="meta row">
+        <div class="col s10 l11 push-l1">
+            <h4 th:text="${mobileModel.name}"></h4>
+            <div>
+                <span class="category"><a th:href="@{|/companies/${mobileModel.company.id}|}" th:text="${mobileModel.company.companyName}" style="color:#191919"></a></span>
+                <div class="actions">
+                    <a th:href="@{|/mobileModels/${mobileModel.id}/edit|}">Edit</a>
+                    <form th:action="@{|/mobileModels/${mobileModel.id}/delete|}" method="post">
+                        <button type="submit">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col s2 l1 pull-l11">
+            <!--TODO max: add products for this model-->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 l11 offset-l1">
+            <div class="divider"></div>
+        </div>
+
+    </div>
+</div>
+<div th:replace="layout :: scripts"></div>
+</body>
+</html>

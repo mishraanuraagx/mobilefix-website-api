@@ -5,6 +5,8 @@ import com.teamscreenbiz.company.Company;
 import com.teamscreenbiz.company.CompanyRepository;
 import com.teamscreenbiz.companyEmployee.CompanyEmployee;
 import com.teamscreenbiz.companyEmployee.CompanyEmployeeRepository;
+import com.teamscreenbiz.mobileModel.MobileModel;
+import com.teamscreenbiz.mobileModel.MobileModelRepository;
 import com.teamscreenbiz.product.Product;
 import com.teamscreenbiz.product.ProductRepository;
 import com.teamscreenbiz.productPrice.ProductPriceCCTRepository;
@@ -25,6 +27,7 @@ import java.util.List;
 @Component
 public class DatabaseLoader implements ApplicationRunner{
     private final UserRepository users;
+    private final MobileModelRepository mobileModelRepository;
     private final CompanyRepository companies;
     private final CompanyEmployeeRepository employees;
     private final ProductRepository products;
@@ -33,7 +36,7 @@ public class DatabaseLoader implements ApplicationRunner{
     private final TransactionRepository transactions;
     private final VendorRepository vendors;
 
-  public DatabaseLoader(UserRepository users, CompanyRepository companies,
+  public DatabaseLoader(UserRepository users,MobileModelRepository mobileModelRepository, CompanyRepository companies,
                         CompanyEmployeeRepository employees,
                         ProductRepository products,
                         ProductPriceCCTRepository cctPrices,
@@ -41,6 +44,7 @@ public class DatabaseLoader implements ApplicationRunner{
                         TransactionRepository transactions,
                         VendorRepository vendors) {
     this.users = users;
+    this.mobileModelRepository = mobileModelRepository;
     this.companies = companies;
     this.employees = employees;
     this.products = products;
@@ -70,6 +74,8 @@ public class DatabaseLoader implements ApplicationRunner{
     users.save(mishra);
 
 
+
+
 //  String companyName, String desc
     List<Company> brands = Arrays.asList(
         new Company("Apple", "Overpriced,Top-Notch"),
@@ -79,6 +85,17 @@ public class DatabaseLoader implements ApplicationRunner{
         new Company("Vivo", "Lol")
     );
     companies.save(brands);
+    Company c = new Company("Screenbiz", "startup");
+    companies.save(c);
+    MobileModel m = new MobileModel("S6");
+    mobileModelRepository.save(m);
+    m.setCompany(c);
+    mobileModelRepository.save(m);
+
+    m = new MobileModel("S6");
+    mobileModelRepository.save(m);
+    m.setCompany(brands.get(2));
+    mobileModelRepository.save(m);
 
     List<CompanyEmployee> colleages = Arrays.asList(
         new CompanyEmployee("Baloo", 7696435591L, "baljitsingh@gmail.com",

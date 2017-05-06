@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <link rel="stylesheet" th:href="@{/app.css}" />
 
-    <title th:text="'Scrrenbiz | ' + ${page_title}">Screenbiz</title>
+    <title th:text="'Screenbiz | ' + ${page_title}">Screenbiz</title>
 </head>
 
 <body>
@@ -21,7 +21,7 @@
 <div th:fragment="nav" class="navbar-fixed">
     <nav>
         <div class="container">
-            <a th:href="@{/}" class="brand-logo">gif<span>.</span>lib</a>
+            <a th:href="@{/}" class="brand-logo">Screen<span>.</span>Biz</a>
             <a href="#" data-activates="mobile-nav" class="button-collapse right"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 <li th:classappend="${#httpServletRequest.servletPath.equals('/upload') ? 'active' : ''}"><a th:href="@{/upload}">Upload</a></li>

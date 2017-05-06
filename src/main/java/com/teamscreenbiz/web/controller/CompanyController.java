@@ -2,6 +2,8 @@ package com.teamscreenbiz.web.controller;
 
 import com.teamscreenbiz.company.Company;
 import com.teamscreenbiz.company.CompanyRepository;
+import com.teamscreenbiz.company.CompanyService;
+import com.teamscreenbiz.company.CompanyServiceImpl;
 import com.teamscreenbiz.web.FlashMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,9 @@ public class CompanyController {
   @Autowired
   private CompanyRepository companyRepository;
 
+  @Autowired
+  private CompanyService companyService;
+
   // Index of all companies
   @RequestMapping("/companies")
   public String listCompanies(Model model) {
@@ -37,6 +42,7 @@ public class CompanyController {
     Company company = companyRepository.findById(companyId);
 
     model.addAttribute("company", company);
+    System.out.println(company.getMobileModels());
     return "company/details";
   }
 
@@ -75,6 +81,7 @@ public class CompanyController {
   @RequestMapping(value = "/companies/{companyId}", method = RequestMethod.POST)
   public String updateCompany(@Valid Company company, BindingResult result, RedirectAttributes redirectAttributes) {
     // TODO: Update company if valid data was received
+    System.out.println(company.getId());
     if(result.hasErrors()) {
       // Include validation errors upon redirect
       redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.company",result);
@@ -87,7 +94,8 @@ public class CompanyController {
     }
 
 //    companyRepository.setUserInfoById(company.getCompanyName(),company.getDesc(),company.getId());
-    companyRepository.save(company);
+
+    companyService.save(company);
 
     redirectAttributes.addFlashAttribute("flash",new FlashMessage("Company successfully updated!", FlashMessage.Status.SUCCESS));
 
@@ -109,7 +117,7 @@ public class CompanyController {
       // Redirect back to the form
       return "redirect:/companies/add";
     }
-
+    System.out.println(company.getId());
     companyRepository.save(company);
 
     redirectAttributes.addFlashAttribute("flash",new FlashMessage("Company successfully added!", FlashMessage.Status.SUCCESS));

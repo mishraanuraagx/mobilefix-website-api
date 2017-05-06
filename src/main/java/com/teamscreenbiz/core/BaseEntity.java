@@ -10,14 +10,12 @@ import javax.persistence.Version;
 public abstract class BaseEntity {
   @Id
   @GeneratedValue(strategy =  GenerationType.AUTO)
-  protected final Long id;
+  protected Long id;
 
   @Version
   private Long version;
 
-  protected BaseEntity() {
-    id = null;
-  }
+
 
   public Long getVersion() {
     return version;
