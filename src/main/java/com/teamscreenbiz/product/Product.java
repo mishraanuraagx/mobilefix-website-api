@@ -1,24 +1,27 @@
 package com.teamscreenbiz.product;
 
 
-import com.teamscreenbiz.core.BaseEntity;
 import com.teamscreenbiz.mobileModel.MobileModel;
-import com.teamscreenbiz.productPrice.ProductPriceCCT;
-import com.teamscreenbiz.productPrice.ProductPriceCommercial;
 import com.teamscreenbiz.transaction.Transaction;
 import com.teamscreenbiz.vendor.Vendor;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Product extends BaseEntity {
+public class Product {
+  @Id
+  @GeneratedValue(strategy =  GenerationType.AUTO)
+  protected Long id;
+
   @NotNull
   private String name;
   @ManyToOne
@@ -28,15 +31,12 @@ public class Product extends BaseEntity {
   @ManyToMany
   private List<Vendor> vendors;
   private double rating;
-  @OneToOne
-  private ProductPriceCCT productPriceCCT;
-  @OneToOne
-  private ProductPriceCommercial productPriceCommercial;
+
   @OneToMany
   private List<Transaction> transactions;
 
 
-  protected Product(){
+  public Product(){
     super();
     vendors = new ArrayList<>();
     transactions = new ArrayList<>();
@@ -56,16 +56,11 @@ public class Product extends BaseEntity {
     transactions.add(transaction);
   }
 
-  public ProductPriceCommercial getProductPriceCommercial() {
-    return productPriceCommercial;
-  }
-
-  public void setProductPriceCommercial(
-      ProductPriceCommercial productPriceCommercial) {
-    this.productPriceCommercial = productPriceCommercial;
-  }
 
   public MobileModel getMobileModel() {
+    if(mobileModel == null){
+      return null;
+    }
     return mobileModel;
   }
 
@@ -82,21 +77,6 @@ public class Product extends BaseEntity {
     vendors.add(vendor);
   }
 
-  public double getRating() {
-    return rating;
-  }
-
-  public void setRating(double rating) {
-    this.rating = rating;
-  }
-
-  public ProductPriceCCT getProductPriceCCT() {
-    return productPriceCCT;
-  }
-
-  public void setProductPriceCCT(ProductPriceCCT productPriceCCT) {
-    this.productPriceCCT = productPriceCCT;
-  }
 
   public String getName() {
     return name;
@@ -110,4 +90,11 @@ public class Product extends BaseEntity {
     return problem;
   }
 
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
 }

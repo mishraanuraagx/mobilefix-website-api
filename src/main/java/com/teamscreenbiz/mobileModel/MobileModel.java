@@ -27,7 +27,7 @@ public class MobileModel{
   private String name;
   @ManyToOne
   private Company company;
-  @OneToMany
+  @OneToMany(mappedBy = "mobileModel")
   private List<Product> products;
 
   public MobileModel(){

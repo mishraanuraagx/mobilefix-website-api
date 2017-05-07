@@ -28,6 +28,17 @@
         <div class="col s12 l11 offset-l1">
             <div class="divider"></div>
         </div>
+        <div class="row">
+            <div th:each="prod : ${mobileModel.getProducts()}" class="col s12 l4">
+                <div class="card-content">
+                    <div class="card-title">
+                        <a class="name" th:href="@{|/products/${prod.id}|}" th:text="${prod.name}">products Name</a>
+                        <a class="name" th:href="@{|/products/${prod.id}|}" th:text="${prod.getMobileModel().getName()}">MobileModel's Company Name</a>
+                        <a class="edit" th:href="@{|/products/${prod.id}/edit|}"><i class="hide-on-med-and-down material-icons">more_horiz</i><i class="hide-on-large-only medium material-icons">more_horiz</i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 </div>

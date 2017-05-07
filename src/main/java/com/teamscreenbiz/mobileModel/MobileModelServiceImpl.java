@@ -19,7 +19,6 @@ public class MobileModelServiceImpl implements MobileModelService {
   @Override
   public MobileModel save(MobileModel mobileModel) {
 //    return repository.save(company);
-    System.out.println(mobileModel.getId());
     if(mobileModel.getId() == null){
       em.persist(mobileModel);
 

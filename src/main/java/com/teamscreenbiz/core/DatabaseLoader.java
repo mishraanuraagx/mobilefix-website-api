@@ -9,8 +9,6 @@ import com.teamscreenbiz.mobileModel.MobileModel;
 import com.teamscreenbiz.mobileModel.MobileModelRepository;
 import com.teamscreenbiz.product.Product;
 import com.teamscreenbiz.product.ProductRepository;
-import com.teamscreenbiz.productPrice.ProductPriceCCTRepository;
-import com.teamscreenbiz.productPrice.ProductPriceCommercialRepository;
 import com.teamscreenbiz.transaction.TransactionRepository;
 import com.teamscreenbiz.user.User;
 import com.teamscreenbiz.user.UserRepository;
@@ -19,7 +17,6 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -31,25 +28,17 @@ public class DatabaseLoader implements ApplicationRunner{
     private final CompanyRepository companies;
     private final CompanyEmployeeRepository employees;
     private final ProductRepository products;
-    private final ProductPriceCCTRepository cctPrices;
-    private final ProductPriceCommercialRepository commercialPrices;
     private final TransactionRepository transactions;
     private final VendorRepository vendors;
 
   public DatabaseLoader(UserRepository users,MobileModelRepository mobileModelRepository, CompanyRepository companies,
-                        CompanyEmployeeRepository employees,
-                        ProductRepository products,
-                        ProductPriceCCTRepository cctPrices,
-                        ProductPriceCommercialRepository commercialPrices,
-                        TransactionRepository transactions,
+                        CompanyEmployeeRepository employees,ProductRepository products,TransactionRepository transactions,
                         VendorRepository vendors) {
     this.users = users;
     this.mobileModelRepository = mobileModelRepository;
     this.companies = companies;
     this.employees = employees;
     this.products = products;
-    this.cctPrices = cctPrices;
-    this.commercialPrices = commercialPrices;
     this.transactions = transactions;
     this.vendors = vendors;
   }
@@ -110,13 +99,13 @@ public class DatabaseLoader implements ApplicationRunner{
 
 //  String name, Company company, String mobileModel,double rating
 
-    List<Product> allParts = Arrays.asList(
-        new Product("xoxoxy", 4.8),
-        new Product("product2", 3.8),
-        new Product("product3", 2.9),
-        new Product("product4", 4.9)
-    );
-    products.save(allParts);
+//    List<Product> allParts = Arrays.asList(
+//        new Product("xoxoxy", 4.8),
+//        new Product("product2", 3.8),
+//        new Product("product3", 2.9),
+//        new Product("product4", 4.9)
+//    );
+//    products.save(allParts);
 
 //  int minVal, int maxVal, int lastQuote,Product product
 //  int minVal, int maxVal, int availableAmount, int profit,Product product
